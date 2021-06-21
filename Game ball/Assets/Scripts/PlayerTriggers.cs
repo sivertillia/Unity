@@ -12,6 +12,10 @@ public class PlayerTriggers : MonoBehaviour
         {
             gm.FinishLevel();
         }
+        if (collision.collider.tag == "Kill")
+        {
+            gm.EndGame();
+        }
     }
 
     void Update()

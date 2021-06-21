@@ -1,34 +1,30 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class SkinController : MonoBehaviour
 {
     public GameObject SkinMenu;
+    public GameObject cm;
     public Text CoinsText;
+    
     public Material material;
-
-    public string[] color;
 
     private int Coin;
     private Color startColor;
 
-    public void Start()
+    void Start()
     {
         startColor = material.GetColor("_Color");
-        // ec = GetComponent<EditColor>();
-
-        color = new string[5] { "red", "green", "blue", "black", "white" };
 
         Coin = PlayerPrefs.GetInt("coins", Coin);
         CoinsText.text = "Монеты: " + Coin.ToString();
     }
-    public void selectColor(int colorId)
+
+    public void ColorMenu()
     {
-        
-        Color newColor;
-        ColorUtility.TryParseHtmlString(color[colorId], out newColor);
-        EditColorMaterial(newColor);
+        cm.SetActive(true);
     }
 
     public void BackInMenu()
@@ -49,7 +45,6 @@ public class SkinController : MonoBehaviour
             SceneManager.LoadScene("Main");
         }
     }
-
 
     public void EditColorMaterial(Color color)
     {

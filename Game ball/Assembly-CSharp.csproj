@@ -66,6 +66,8 @@
     <Compile Include="Assets\Scripts\PlayerTriggers.cs" />
     <Compile Include="Assets\Scripts\Skin.cs" />
     <Compile Include="Assets\Scripts\SkinController.cs" />
+    <Compile Include="Assets\Scripts\Skins\MaterialPool.cs" />
+    <Compile Include="Assets\Scripts\Skins\SkinChanger.cs" />
     <Compile Include="Assets\Scripts\Timer.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -652,6 +654,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="HSVPicker.csproj">
+      <Project>{1F521B7A-8D8A-601B-45C3-B6EF73A700CA}</Project>
+      <Name>HSVPicker</Name>
+    </ProjectReference>
+    <ProjectReference Include="HSVPicker.Editors.csproj">
+      <Project>{0376A876-E4C7-E1D1-9A0F-A1B16C3D0098}</Project>
+      <Name>HSVPicker.Editors</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
