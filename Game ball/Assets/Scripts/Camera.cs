@@ -2,11 +2,11 @@
 
 public class Camera : MonoBehaviour
 {
-    public Transform player;
-    public Vector3 offset;
+    public Transform cameraTransform;
+    public Vector3 cameraOffset;
 
     void Update()
     {
-        transform.position = player.position + offset;
+        cameraTransform.position = transform.position + cameraOffset;
     }
 }

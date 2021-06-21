@@ -1,10 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerTriggers : MonoBehaviour
 {
     public GameManage gm;
+
+    private bool dierGame = true;
+    private bool escPause = false;
     void OnCollisionEnter(Collision collision)
     {
         if(collision.collider.tag == "Finish")
@@ -17,7 +18,15 @@ public class PlayerTriggers : MonoBehaviour
     {
         if(transform.position.y < -5f)
         {
-            gm.EndGame();
+            if (dierGame)
+            {
+                gm.EndGame();
+                dierGame = false;
+            }
+        }
+        if (Input.GetKeyDown("escape"))
+        {
+            gm.Pause();
         }
     }
 }

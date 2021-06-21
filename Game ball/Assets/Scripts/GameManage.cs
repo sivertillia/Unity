@@ -1,29 +1,70 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameManage : MonoBehaviour
 {
-    // public PlayerMovement movement;
-    public float levelRestartDaly = 1f;
+    public GameObject PauseMenu;
+    public GameObject DierMenu;
+    public GameObject EndMenu;
+
+    public Text deadScoreText;
+
+    private int deadScore;
+    private int tempDeadScore;
+    private string lvlName;
+    private string tempLvlName;
+
+    // public GameObject MainCan;
+
+    public void Start()
+    {
+        lvlName = "Dead-" + SceneManager.GetActiveScene().name.ToString();
+        deadScore = PlayerPrefs.GetInt(lvlName);
+
+        tempLvlName = "DeadTemp-" + SceneManager.GetActiveScene().name.ToString();
+        tempDeadScore = PlayerPrefs.GetInt(tempLvlName);
+
+        deadScoreText.text = "Смерти: " + tempDeadScore.ToString();
+    }
 
     public void EndGame()
     {
-        // movement.enabled = false;
-        Invoke("RestartLevel", levelRestartDaly);
+        Freez();
+        tempDeadScore += 1;
+        PlayerPrefs.SetInt(tempLvlName, tempDeadScore);
+        PauseMenu.SetActive(false);
+        EndMenu.SetActive(false);
+        DierMenu.SetActive(true);
     }
 
     public void FinishLevel()
     {
-        NextLevel();
+        Freez();
+        if(deadScore == 0 || tempDeadScore <= deadScore)
+        {
+            PlayerPrefs.SetInt(lvlName, tempDeadScore);
+        }
+        PlayerPrefs.SetInt(tempLvlName, 0);
+
+        int Coin = PlayerPrefs.GetInt("coins");
+        Coin += 10;
+        PlayerPrefs.SetInt("coins", Coin);
+        PauseMenu.SetActive(false);
+        DierMenu.SetActive(false);
+        EndMenu.SetActive(true);
     }
 
-    void RestartLevel()
+    public void Pause()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Freez();
+        EndMenu.SetActive(false);
+        DierMenu.SetActive(false);
+        PauseMenu.SetActive(true);
     }
 
-    void NextLevel()
+    public void Freez()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        Time.timeScale = 0;
     }
 }
