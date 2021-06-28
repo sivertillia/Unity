@@ -4,7 +4,7 @@ public class PlayerMove : MonoBehaviour
 {
     public Transform cameraTransform;
     public Vector3 cameraOffset;
-    public float speed = 50f;
+    public float speed = 11f;
 
     private Rigidbody rb;
     private Vector3 controlDirection;
